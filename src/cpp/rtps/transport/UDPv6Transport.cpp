@@ -102,9 +102,9 @@ UDPv6Transport::UDPv6Transport(
 {
     mSendBufferSize = descriptor.sendBufferSize;
     mReceiveBufferSize = descriptor.receiveBufferSize;
-    for (const auto& interface : descriptor.interfaceWhiteList)
+    for (const auto& interfaceName : descriptor.interfaceWhiteList)
     {
-        interface_whitelist_.emplace_back(ip::address_v6::from_string(interface));
+        interface_whitelist_.emplace_back(ip::address_v6::from_string(interfaceName));
     }
 }
 
@@ -346,7 +346,7 @@ bool UDPv6Transport::OpenInputChannel(
         auto pChannelResources = mInputSockets.at(IPLocator::getPhysicalPort(locator));
         for (auto& channelResource : pChannelResources)
         {
-            if (channelResource->interface() == s_IPv4AddressAny)
+            if (channelResource->interfaceName() == s_IPv4AddressAny)
             {
                 std::vector<IPFinder::info_IP> locNames;
                 get_ipv6s_unique_interfaces(locNames, true);
@@ -367,7 +367,7 @@ bool UDPv6Transport::OpenInputChannel(
             }
             else
             {
-                auto ip = asio::ip::address_v6::from_string(channelResource->interface());
+                auto ip = asio::ip::address_v6::from_string(channelResource->interfaceName());
                 try
                 {
                     channelResource->socket()->set_option(ip::multicast::join_group(
@@ -404,9 +404,9 @@ std::vector<std::string> UDPv6Transport::get_binding_interfaces_list()
 }
 
 bool UDPv6Transport::is_interface_allowed(
-        const std::string& interface) const
+        const std::string& interfaceName) const
 {
-    return is_interface_allowed(asio::ip::address_v6::from_string(interface));
+    return is_interface_allowed(asio::ip::address_v6::from_string(interfaceName));
 }
 
 bool UDPv6Transport::is_interface_allowed(

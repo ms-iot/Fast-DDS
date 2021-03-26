@@ -14,8 +14,11 @@
 
 set(fastrtps_FOUND TRUE)
 
+# Windows store does not support building tools
+if (NOT CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
 cmake_policy(PUSH)
 add_subdirectory(fds)
 cmake_policy(POP)
 
 add_subdirectory(fastdds)
+endif()

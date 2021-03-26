@@ -271,6 +271,11 @@ if(EPROSIMA_BUILD AND IS_TOP_LEVEL)
     set(COMPILE_TOOLS ON)
 endif()
 
+if (CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+    set(COMPILE_TOOLS OFF)
+endif()
+
+
 ###############################################################################
 # Compile library.
 ###############################################################################
@@ -290,6 +295,10 @@ option(COMPILE_EXAMPLES "Build example" OFF)
 
 if(EPROSIMA_BUILD AND IS_TOP_LEVEL AND NOT EPROSIMA_INSTALLER AND NOT EPROSIMA_INSTALLER_MINION)
     set(COMPILE_EXAMPLES ON)
+endif()
+
+if (CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+    set(COMPILE_EXAMPLES OFF)
 endif()
 
 if(COMPILE_EXAMPLES)

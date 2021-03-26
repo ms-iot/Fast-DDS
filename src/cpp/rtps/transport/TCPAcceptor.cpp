@@ -36,14 +36,14 @@ TCPAcceptor::TCPAcceptor(
 
 TCPAcceptor::TCPAcceptor(
         asio::io_service& io_service,
-        const std::string& interface,
+        const std::string& interfaceName,
         const Locator_t& locator)
-    : acceptor_(io_service, asio::ip::tcp::endpoint(asio::ip::address_v4::from_string(interface),
+    : acceptor_(io_service, asio::ip::tcp::endpoint(asio::ip::address_v4::from_string(interfaceName),
         IPLocator::getPhysicalPort(locator)))
     , locator_(locator)
     , io_service_(&io_service)
 {
-    endpoint_ = asio::ip::tcp::endpoint(asio::ip::address_v4::from_string(interface),
+    endpoint_ = asio::ip::tcp::endpoint(asio::ip::address_v4::from_string(interfaceName),
         IPLocator::getPhysicalPort(locator_));
 }
 

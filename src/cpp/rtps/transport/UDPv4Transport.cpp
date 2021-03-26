@@ -341,7 +341,7 @@ bool UDPv4Transport::OpenInputChannel(
             auto& channelResources = mInputSockets.at(IPLocator::getPhysicalPort(locator));
             for (UDPChannelResource* channelResource : channelResources)
             {
-                if (channelResource->interface() == locatorAddressStr)
+                if (channelResource->interfaceName() == locatorAddressStr)
                 {
                     found = true;
                     break;
@@ -382,7 +382,7 @@ bool UDPv4Transport::OpenInputChannel(
             auto& channelResources = mInputSockets.at(IPLocator::getPhysicalPort(locator));
             for (UDPChannelResource* channelResource : channelResources)
             {
-                if (channelResource->interface() == s_IPv4AddressAny)
+                if (channelResource->interfaceName() == s_IPv4AddressAny)
                 {
                     std::vector<IPFinder::info_IP> locNames;
                     get_ipv4s_unique_interfaces(locNames, true);
@@ -402,7 +402,7 @@ bool UDPv4Transport::OpenInputChannel(
                 }
                 else
                 {
-                    auto ip = asio::ip::address_v4::from_string(channelResource->interface());
+                    auto ip = asio::ip::address_v4::from_string(channelResource->interfaceName());
                     try
                     {
                         channelResource->socket()->set_option(ip::multicast::join_group(locatorAddress, ip));
@@ -439,9 +439,9 @@ std::vector<std::string> UDPv4Transport::get_binding_interfaces_list()
 }
 
 bool UDPv4Transport::is_interface_allowed(
-        const std::string& interface) const
+        const std::string& interfaceName) const
 {
-    return is_interface_allowed(asio::ip::address_v4::from_string(interface));
+    return is_interface_allowed(asio::ip::address_v4::from_string(interfaceName));
 }
 
 bool UDPv4Transport::is_interface_allowed(

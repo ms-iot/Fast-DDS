@@ -18,6 +18,11 @@
 #include <asio.hpp>
 #include <fastdds/rtps/common/Locator.h>
 
+#ifdef _WIN32
+// interface is a pseudo-reserved word on Windows
+#undef interface
+#endif
+
 namespace eprosima{
 namespace fastdds{
 namespace rtps{
@@ -44,7 +49,7 @@ public:
 
     TCPAcceptor(
         asio::io_service& io_service,
-        const std::string& interface,
+        const std::string& interfaceName,
         const fastrtps::rtps::Locator_t& locator);
 
     const fastrtps::rtps::Locator_t& locator() const

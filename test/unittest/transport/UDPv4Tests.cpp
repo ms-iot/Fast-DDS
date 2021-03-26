@@ -460,9 +460,9 @@ TEST_F(UDPv4Tests, send_and_receive_between_allowed_sockets_using_unicast)
     std::vector<IPFinder::info_IP> interfaces;
     GetIP4s(interfaces);
 
-    for(const auto& interface : interfaces)
+    for(const auto& interfaceInstance : interfaces)
     {
-        descriptor.interfaceWhiteList.push_back(interface.name);
+        descriptor.interfaceWhiteList.push_back(interfaceInstance.name);
     }
     UDPv4Transport transportUnderTest(descriptor);
     transportUnderTest.init();
@@ -518,9 +518,9 @@ TEST_F(UDPv4Tests, send_and_receive_between_allowed_sockets_using_unicast_to_mul
     std::vector<IPFinder::info_IP> interfaces;
     GetIP4s(interfaces);
 
-    for(const auto& interface : interfaces)
+    for(const auto& interfaceInstance : interfaces)
     {
-        descriptor.interfaceWhiteList.push_back(interface.name);
+        descriptor.interfaceWhiteList.push_back(interfaceInstance.name);
     }
     UDPv4Transport transportUnderTest(descriptor);
     transportUnderTest.init();

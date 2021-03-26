@@ -48,7 +48,7 @@ public:
     */
     TCPAcceptorSecure(
         asio::io_service& io_service,
-        const std::string& interface,
+        const std::string& interfaceName,
         const fastrtps::rtps::Locator_t& locator);
 
     /**

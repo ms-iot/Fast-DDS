@@ -357,6 +357,10 @@ RTPSParticipant* RTPSDomain::clientServerEnvironmentCreationOverride(
         RTPSParticipantListener* listen /*= nullptr*/)
 {
     // retrieve the environment variable value
+#if defined(__cplusplus_winrt)
+    // in UWP, it is not possible to specify this in an environment variable.
+    return nullptr;
+#else
     std::string list;
     {
 #pragma warning(suppress:4996)
@@ -411,6 +415,7 @@ RTPSParticipant* RTPSDomain::clientServerEnvironmentCreationOverride(
     // unable to create auto server-client default participants
     logError(DOMAIN, "Auto default server-client setup. Unable to create the client.");
     return nullptr;
+#endif
 }
 
 void RTPSDomainImpl::create_participant_guid(

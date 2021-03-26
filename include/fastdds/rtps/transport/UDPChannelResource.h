@@ -116,12 +116,12 @@ public:
         return getSocketPtr(socket_);
     }
 
-    inline void interface(const std::string& interface)
+    inline void interfaceName(const std::string& interfaceName)
     {
-        interface_ = interface;
+        interface_ = interfaceName;
     }
 
-    inline const std::string& interface() const
+    inline const std::string& interfaceName() const
     {
         return interface_;
     }
