@@ -424,6 +424,8 @@ elseif(NOT EPROSIMA_INSTALLER)
         set(PRIVACY "PRIVATE")
     endif()
 
+    set_target_properties(foonathan_memory PROPERTIES MAP_IMPORTED_CONFIG_MINSIZEREL Release MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release)    
+    
     # Link library to external libraries.
     target_link_libraries(${PROJECT_NAME} ${PRIVACY} fastcdr foonathan_memory
         ${CMAKE_THREAD_LIBS_INIT} ${CMAKE_DL_LIBS}
