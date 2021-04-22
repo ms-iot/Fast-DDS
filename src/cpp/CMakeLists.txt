@@ -384,6 +384,11 @@ elseif(NOT EPROSIMA_INSTALLER)
         target_compile_options(${PROJECT_NAME} PRIVATE /w34101 /w34555 )
     endif(MSVC)
 
+    if("${CMAKE_SYSTEM_NAME}" STREQUAL "WindowsStore")
+        set(SHM_TRANSPORT_DEFAULT OFF)
+        message(STATUS "Disabling Shared Memory transport on UWP")
+    endif()
+
     target_compile_definitions(${PROJECT_NAME} PRIVATE
         ${PROJECT_NAME_UPPER}_SOURCE
         BOOST_ASIO_STANDALONE
