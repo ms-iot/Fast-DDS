@@ -74,7 +74,7 @@ macro(eprosima_find_package package)
 endmacro()
 
 macro(eprosima_find_thirdparty package thirdparty_name)
-    if(NOT (EPROSIMA_INSTALLER AND (MSVC OR MSVC_IDE)))
+    if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore" OR NOT (EPROSIMA_INSTALLER AND (MSVC OR MSVC_IDE)))
 
         option(THIRDPARTY_${package} "Activate the use of internal thirdparty ${package}" OFF)
 
